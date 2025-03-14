@@ -83,8 +83,8 @@ export default MyComponent;
   </tr>
    <tr>
     <td> maxWidth </td>
-    <td> Maximum width of a line. Defaults to 2.5. </td>
     <td> number </td>
+    <td> Maximum width of a line. Defaults to 2.5. </td>
   </tr>
    <tr>
     <td> throttle </td>
@@ -114,7 +114,7 @@ export default MyComponent;
   <tr>
     <td> canvasContextOptions </td>
     <td> CanvasRenderingContext2DSettings </td>
-    <td> part of the Canvas API, provides the 2D rendering context for the drawing surface of a canvas element. It is used for drawing shapes, text, images, and other objects</td>
+    <td> Part of the Canvas API, provides the 2D rendering context for the drawing surface of a canvas element. It is used for drawing shapes, text, images, and other objects</td>
   </tr>
   <tr>
     <td> canvasProps </td>

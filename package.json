@@ -1,0 +1,52 @@
+{
+  "name": "@siamf/react-signature-pad",
+  "version": "1.0.0",
+  "description": "A react signature pad wrapper component with all essential API and latest version of signature pad.",
+  "homepage": "https://github.com/siamahnaf/react-signature-pad",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
+  },
+  "author": {
+    "name": "Siam Ahnaf",
+    "email": "mail@siamahnaf.com",
+    "url": "https://www.siamahnaf.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "signature",
+    "sign",
+    "e-sign",
+    "e-signature",
+    "signature-pad",
+    "digital-signature",
+    "signature-pad",
+    "react-signature-pad"
+  ],
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/siamahnaf/react-signature-pad",
+    "url": "https://github.com/siamahnaf/react-signature-pad"
+  },
+  "devDependencies": {
+    "@types/node": "^22.12.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "dependencies": {
+    "signature_pad": "^5.0.6"
+  }
+}
