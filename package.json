@@ -1,6 +1,6 @@
 {
   "name": "@siamf/react-signature-pad",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "A react signature pad wrapper component with all essential API and latest version of signature pad.",
   "homepage": "https://github.com/siamahnaf/react-signature-pad",
   "main": "dist/cjs/index.js",
