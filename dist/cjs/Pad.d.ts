@@ -4,10 +4,12 @@ export interface SignatureCanvasProps extends Options {
     canvasProps?: React.CanvasHTMLAttributes<HTMLCanvasElement>;
     clearOnResize?: boolean;
 }
+type FileType = "image/jpeg" | "image/svg+xml" | "image/png";
 export interface SignatureCanvasRef {
     clear: () => void;
     isEmpty: () => boolean;
-    toDataURL: (type?: string, encoderOptions?: number) => string;
+    toDataURL: (type?: FileType, encoderOptions?: number) => string;
+    toFile: (type?: FileType, encoderOptions?: number) => File;
     toSVG: (options?: ToSVGOptions) => string;
     fromDataURL: (dataUrl: string, options?: {
         ratio?: number;

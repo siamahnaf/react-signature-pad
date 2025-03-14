@@ -6,10 +6,13 @@ export interface SignatureCanvasProps extends Options {
     clearOnResize?: boolean;
 }
 
+type FileType = "image/jpeg" | "image/svg+xml" | "image/png";
+
 export interface SignatureCanvasRef {
     clear: () => void;
     isEmpty: () => boolean;
-    toDataURL: (type?: string, encoderOptions?: number) => string;
+    toDataURL: (type?: FileType, encoderOptions?: number) => string;
+    toFile: (type?: FileType, encoderOptions?: number) => File;
     toSVG: (options?: ToSVGOptions) => string;
     fromDataURL: (dataUrl: string, options?: { ratio?: number; width?: number; height?: number; xOffset?: number; yOffset?: number }) => Promise<void>;
     toData: () => PointGroup[];
@@ -78,6 +81,19 @@ const SignatureCanvas = forwardRef<SignatureCanvasRef, SignatureCanvasProps>(
             getSignaturePad().clear();
         };
 
+        const dataURLToBlob = (dataURL: string) => {
+            const arr = dataURL.split(",");
+            const mime = arr[0].match(/:(.*?);/)![1];
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        };
+
+
         // Expose methods
         useImperativeHandle(ref, () => ({
             clear: () => getSignaturePad().clear(),
@@ -85,6 +101,16 @@ const SignatureCanvas = forwardRef<SignatureCanvasRef, SignatureCanvasProps>(
             isEmpty: () => getSignaturePad().isEmpty(),
 
             toDataURL: (type = "image/png", encoderOptions?: number) => getSignaturePad().toDataURL(type, encoderOptions),
+
+            toFile: (type = "image/png", encoderOptions?: number) => {
+                const dataURL = getSignaturePad().toDataURL(type, encoderOptions);
+                const blob = dataURLToBlob(dataURL);
+                const ext = type === "image/png" ? ".png" : type === "image/jpeg" ? ".jpg" : ".svg";
+
+                const file = new File([blob], `signature${ext}`, { type: type });
+
+                return file;
+            },
 
             toSVG: (options?: ToSVGOptions) => getSignaturePad().toSVG(options),
 

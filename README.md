@@ -148,8 +148,13 @@ export default MyComponent;
   </tr>
    <tr>
     <td> toDataURL() </td>
-    <td> (type?: string, encoderOptions?: number) </td>
-    <td> Writes a base64 image to canvas </td>
+    <td> (type?: string, encoderOptions?: number):string </td>
+    <td> Get signature Data URL </td>
+  </tr>
+  <tr>
+    <td> toFile() </td>
+    <td> (type?: string, encoderOptions?: number):File </td>
+    <td> Get Signature Image File </td>
   </tr>
    <tr>
     <td> toSVG() </td>

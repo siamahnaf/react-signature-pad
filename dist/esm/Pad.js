@@ -65,11 +65,29 @@ const SignatureCanvas = forwardRef((_a, ref) => {
         canvas.getContext("2d").scale(ratio, ratio);
         getSignaturePad().clear();
     };
+    const dataURLToBlob = (dataURL) => {
+        const arr = dataURL.split(",");
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+    };
     // Expose methods
     useImperativeHandle(ref, () => ({
         clear: () => getSignaturePad().clear(),
         isEmpty: () => getSignaturePad().isEmpty(),
         toDataURL: (type = "image/png", encoderOptions) => getSignaturePad().toDataURL(type, encoderOptions),
+        toFile: (type = "image/png", encoderOptions) => {
+            const dataURL = getSignaturePad().toDataURL(type, encoderOptions);
+            const blob = dataURLToBlob(dataURL);
+            const ext = type === "image/png" ? ".png" : type === "image/jpeg" ? ".jpg" : ".svg";
+            const file = new File([blob], `signature${ext}`, { type: type });
+            return file;
+        },
         toSVG: (options) => getSignaturePad().toSVG(options),
         fromDataURL: (dataUrl, options) => getSignaturePad().fromDataURL(dataUrl, options),
         toData: () => getSignaturePad().toData(),
